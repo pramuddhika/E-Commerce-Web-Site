@@ -73,8 +73,8 @@ const SideBar = () => {
   }
 
   return (
-    <div className="w-64 p-5 h-screen">
-      <h1 className="text-2xl front-bold mb-10 mt-4">React Store</h1>
+    <div className="w-64 p-1 h-screen">
+      <h1 className="text-2xl front-bold mb-2 mt-0">React Store</h1>
 
       <section>
 
@@ -136,7 +136,7 @@ const SideBar = () => {
             <button 
               key={index} 
               onClick={ () => handleKeywordClick(keyword)}
-              className="block mb-2 px-4 py-2 w-full text-left border rounded hover:bg-gray-200">
+              className="block mb-2 px-4 py-1 w-full text-left border rounded hover:bg-gray-200">
               {keyword.toUpperCase()}
             </button>
             ))}
@@ -144,7 +144,7 @@ const SideBar = () => {
 
         </div>
 
-        <button onClick={handleResetFilter} className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-5">
+        <button onClick={handleResetFilter} className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-1">
           Reset Filters
         </button>
         
