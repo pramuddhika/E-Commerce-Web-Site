@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { FilterProvider, useFilter } from "./FilterContext"
 import {Tally3} from "lucide-react"
 import axios from "axios";
+import BookCard from "./BookCard";
 
 
 
@@ -40,10 +41,32 @@ const MainContent = () => {
             filteredProducts = filteredProducts.filter(product => product.category === selectedCategory);
         }
     
-        console.log(filteredProducts);
+        if(minPrice !== undefined){
+            filteredProducts = filteredProducts.filter( product => product.price >= minPrice);
+        }
+
+        if(maxPrice !== undefined){
+            filteredProducts = filteredProducts.filter( product => product.price <= maxPrice);
+        }
+
+        if(searchQuery){
+            filteredProducts = filteredProducts.filter(product =>  product.title.toLowerCase().includes(searchQuery.toLowerCase()));
+        }
+
+        switch(filter){
+            case "expensive":
+                return filteredProducts.sort((a,b) => b.price - a.price);
+            case "cheap":
+                return filteredProducts.sort((a,b) => a.price - b.price);
+            case "popular":
+                return filteredProducts.sort((a,b) => b.rating - a.rating);
+            default:
+                return filteredProducts;
+        }
     };
     
-    getFilteredProducts();
+    const filteredProducts = getFilteredProducts();
+    
 
   return (
     <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem] p-5">
@@ -77,10 +100,21 @@ const MainContent = () => {
 
             </div>
 
-            <div className="gird gird-cols-4 sm:gird-cols-3 md:gird-cols-4 gap-5">
-                {/**bookCard */}
-
+            <div className="grid grid-cols-4 gap-5">
+                {filteredProducts.slice(0, 12).map(product => (
+                    <BookCard
+                        key={product.id}
+                        id={product.id}
+                        title={product.title}
+                        image={product.thumbnail}
+                        price={product.price}
+                    />
+                ))}
             </div>
+
+            {/**previous button */}
+            {/**1,2,3 */}
+            {/**next button */}
 
         </div>
     </section>
