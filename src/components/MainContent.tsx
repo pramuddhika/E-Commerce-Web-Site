@@ -66,6 +66,34 @@ const MainContent = () => {
     };
     
     const filteredProducts = getFilteredProducts();
+
+    const totalProducts = 100;
+    const totalPages = Math.ceil(totalProducts / itemsPerPage)
+
+    const handlePageChange = (page:number) => {
+        if(page > 0 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    }
+
+    const getPaginationButtons = () => {
+        const buttons : number[] = []
+        let startPage = Math.max(1, currentPage - 2 )
+        let endPage = Math.min (totalPages, currentPage +2)
+
+        if(currentPage - 2  < 1 ){
+            endPage = Math.min(totalPages, endPage + (2 - currentPage - 1));
+        }
+        if(currentPage + 2  > totalPages ){
+            startPage = Math.min(1, startPage - (2 - totalPages - currentPage));
+        }
+
+        for ( let page = startPage; page <= endPage; page++){
+            buttons.push(page)
+        }
+
+        return buttons;
+    }
     
 
   return (
@@ -76,7 +104,9 @@ const MainContent = () => {
 
                 <div className="relative mb-3 mt-3">
 
-                    <button className="border px-4 py-2 rounded-full flex items-center">
+                    <button
+                     onClick={ () => setDropdownOpen(!dropdownOpen)}
+                     className="border px-4 py-2 rounded-full flex items-center">
                         <Tally3 className="mr-2" />
 
                         {filter === "all" ? 'Filter' : filter.charAt(0).toLocaleLowerCase() + filter.slice(1)}
@@ -112,9 +142,42 @@ const MainContent = () => {
                 ))}
             </div>
 
-            {/**previous button */}
-            {/**1,2,3 */}
-            {/**next button */}
+            <div className="flex  flex-col sm:flex-row justify-between items-center mt-5">
+                {/**previous button */}
+                <button 
+                 onClick={() => handlePageChange(currentPage - 1)} 
+                 className="border px-4  py-2 mx-2 rounded-full"
+                 disabled={currentPage === 1}
+                >
+                  Previous
+                </button>
+
+                {/**1,2,3 */}
+                <div className="flex flex-wrap justify-center">
+                    {getPaginationButtons().map(page => (
+                        <button
+                          key={page}
+                          onClick={ () => handlePageChange(page)}
+                          className={`border px-4 py-2 mx-1 rounded-full 
+                            ${page === currentPage ? 'bg-black text-white' : ''}`}
+                        >
+                            {page}
+                        </button>
+                    ))}
+                </div>
+
+
+                {/**next button */}
+                <button
+                  className="border px-4 py-2 mx-2 rounded-full"
+                  disabled= {currentPage === totalPages} 
+                  onClick={ () => handlePageChange(currentPage + 1) }
+                >
+                    Next
+                </button>
+
+            </div>
+            
 
         </div>
     </section>
