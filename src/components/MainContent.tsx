@@ -97,12 +97,12 @@ const MainContent = () => {
     
 
   return (
-    <section className="xl:w-[55rem] lg:w-[55rem] sm:w-[40rem] xs:w-[20rem] p-5">
+    <section className="w-full p-3">
         <div className="mb-4">
 
             <div className="flex flex-col sm:flex-row justify-between items-center">
 
-                <div className="relative mb-3 mt-3">
+                <div className="relative mb-3 mt-1">
 
                     <button
                      onClick={ () => setDropdownOpen(!dropdownOpen)}

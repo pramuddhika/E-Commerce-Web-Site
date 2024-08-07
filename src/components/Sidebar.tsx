@@ -80,7 +80,7 @@ const SideBar = () => {
 
         <input 
          type="text" 
-         className="border-2 rounded px-2 sm:mb-0" 
+         className="border-2 rounded p-2 m-2" 
          placeholder="Search product"
          value={searchQuery}
          onChange={ e => setSearchQuery(e.target.value)} 
@@ -90,7 +90,7 @@ const SideBar = () => {
 
           <input
             type="text"
-            className="border-2 mr-2 px-5 py-3 mb-3 w-full"
+            className="border-2 m-3 p-2 w-full"
             placeholder="Min"
             value={minPrice ?? ''}
             onChange={handleMinPriceChange}
@@ -98,7 +98,7 @@ const SideBar = () => {
 
           <input
             type="text"
-            className="border-2 mr-2 px-5 py-3 mb-3 w-full"
+            className="border-2 m-3 p-2 w-full"
             placeholder="Max"
             value={maxPrice ?? ""}
             onChange={handleMaxPriceChange}
